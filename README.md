@@ -56,7 +56,7 @@ A modern, full-stack team project management platform — a simplified Trello/As
 | Charts | Recharts |
 | Animations | Framer Motion |
 | Notifications | React Hot Toast |
-| Deployment | Render (backend + DB) / Vercel (frontend) |
+| Deployment | Railway (backend + DB) / Vercel (frontend) |
 
 ## 🚀 Quick Start
 
@@ -138,7 +138,6 @@ teamforge/
 │   ├── wsgi.py
 │   ├── requirements.txt
 │   ├── Procfile
-│   └── render.yaml
 ├── frontend/
 │   ├── src/
 │   │   ├── main.jsx
@@ -159,20 +158,19 @@ teamforge/
 
 ## 🌐 Deployment
 
-### Render (Backend + PostgreSQL)
+### Railway (Backend + PostgreSQL)
 1. Push repo to GitHub
-2. Create **Web Service** on Render → connect repo
-3. Add **PostgreSQL** database
-4. Set environment variables:
+2. Create a new **Project** on Railway → add a **PostgreSQL** database service
+3. Add a new service from your GitHub repo for the backend
+4. In your backend service variables, set:
    - `JWT_SECRET_KEY` — strong random secret
    - `FLASK_ENV` — `production`
-   - `DATABASE_URL` — auto-linked from PostgreSQL
-5. Build: `pip install -r requirements.txt`
-6. Start: `gunicorn "app:create_app()" --bind 0.0.0.0:$PORT`
+5. Railway will automatically link the database and provide `DATABASE_URL`
+6. The `Procfile` will automatically tell Railway how to start the app
 
-### Vercel (Frontend)
-1. Import frontend directory on Vercel
-2. Set `VITE_API_URL` → Render backend URL
+### Vercel or Railway (Frontend)
+1. Import frontend directory on Vercel or as another service on Railway
+2. Set `VITE_API_URL` → your deployed backend URL
 3. Build: `npm run build` → Output: `dist/`
 
 ## 📝 License
